@@ -26,15 +26,22 @@ public class App {
         List<Map<String, String>> listaDeFilmes = parser.parse(body);
        
         //exibir e manipular os dados
-        for (Map<String,String> filmes : listaDeFilmes) {
-        String urlImagem = filmes.get("image");
+        var geradora = new GeradoraDeFigurinhas();
+
+        for (int i = 0; i < 10; i++) {
+
+            Map<String,String> filmes = listaDeFilmes.get(i);
+
+        String urlImagem = filmes.get("image")
+            .replaceAll("(@+)(.*).jpg$", "$1.jppg");
+
         String titulo = filmes.get("title");
 
             InputStream inputStream = new URL(urlImagem).openStream();
 
-            String nomeArquivo = titulo + ".png";
+            String nomeArquivo ="saida/" +titulo + ".png";
 
-           var geradora = new GeradoraDeFigurinhas();
+        
            geradora.cria(inputStream, nomeArquivo);
            
             System.out.println(filmes.get("title"));
