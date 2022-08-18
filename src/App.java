@@ -12,7 +12,8 @@ public class App {
     public static void main(String[] args) throws Exception {
         
         //fazer a conexao HTTP e buscar os top 50 filmes
-           String url = "https://imdb-api.com/en/API/MostPopularMovies/k_t2mh0gt5";
+           //String url = "https://imdb-api.com/en/API/MostPopularMovies/k_t2mh0gt5";
+           String url = "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&start_date=2022-06-12&end_date=2022-06-14";
            URI endereco = URI.create(url);
            var client = HttpClient.newHttpClient();
            HttpRequest request = HttpRequest.newBuilder(endereco).GET().build();
@@ -28,11 +29,13 @@ public class App {
         //exibir e manipular os dados
         var geradora = new GeradoraDeFigurinhas();
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 3; i++) {
 
             Map<String,String> filmes = listaDeFilmes.get(i);
 
-        String urlImagem = filmes.get("image")
+        String urlImagem = 
+            //filmes.get("image")
+            filmes.get("url")
             .replaceAll("(@+)(.*).jpg$", "$1.jppg");
 
         String titulo = filmes.get("title");
